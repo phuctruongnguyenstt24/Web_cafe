@@ -10,13 +10,41 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- File CSS của bạn -->
+  <link rel="stylesheet" href="../index.css">
   <link href="stylenhan.css" rel="stylesheet">
-
   <!--Trình duyệt sẽ ưu tiên CSS được load sau. Vì thế stylenhan.css sẽ ghi đè được Bootstrap.-->
 </head>
 
 <body>
-
+<!-- Navigation Bar -->
+        <nav>
+            <div class="nav-left">
+                <img src="../Gemini_Generated_Image_8xwqe28xwqe28xwq.png" alt="Logo Chill Cafe" class="logo">
+                <h1>Chill Cafe</h1>
+            </div>
+    
+            <div class="nav-center">
+                <ul>
+                    <li><a href="../index.html" onclick="showPage('home')">Trang Chủ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="menu.html" onclick="showPage('menu')">Thực Đơn</a></li>
+                    <li><a href="Jobs.html" onclick="showPage('products')">Tuyển Dụng</a></li>
+                    <li><a href="Contact.html" onclick="showPage('contact')">Liên Hệ</a></li>
+                    <li><a href="blog.html" onclick="showPage('blog')">Blog</a></li>
+                    <li><a href="FAQ.html">FAQ</a></li>
+                </ul>
+            </div>
+    
+            <div class="nav-right">
+                <div class="search-container">
+                    <input type="text" placeholder="Tìm kiếm..." id="search-input">
+                    <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+                </div>
+                <button class="btn-login" onclick="openLogin()"><i class="fas fa-user"></i> Đăng nhập</button>
+                <button class="btn-cart" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Giỏ hàng <span
+                        id="cart-count">0</span></button>
+            </div>
+        </nav>
     
   <!-- Phần riêng-->
    <!--Row columns gutters: https://getbootstrap.com/docs/5.0/layout/gutters/#row-columns-gutters-->
@@ -92,5 +120,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 
 
