@@ -15,33 +15,34 @@
 
 <body>
     <!-- Navigation Bar -->
-    <nav>
-        <div class="nav-left">
-            <img src="../Gemini_Generated_Image_8xwqe28xwqe28xwq.png" alt="Logo Chill Cafe" class="logo">
-            <h1>Chill Cafe</h1>
-        </div>
-
-        <div class="nav-center">
-            <ul>
-                <li><a href="../index.html" onclick="showPage('home')">Trang Chủ</a></li>
-                <li><a href="about.html">Giới Thiệu</a></li>
-                <li><a href="menu.html" onclick="showPage('menu')">Thực Đơn</a></li>
-                <li><a href="#products" onclick="showPage('products')">Sản Phẩm</a></li>
-                <li><a href="#contact" onclick="showPage('contact')">Liên Hệ</a></li>
-                <li><a href="#blog" onclick="showPage('blog')">Blog</a></li>
-            </ul>
-        </div>
-
-        <div class="nav-right">
-            <div class="search-container">
-                <input type="text" placeholder="Tìm kiếm..." id="search-input">
-                <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+        <nav>
+            <div class="nav-left">
+                <img src="../Gemini_Generated_Image_8xwqe28xwqe28xwq.png" alt="Logo Chill Cafe" class="logo">
+                <h1>Chill Cafe</h1>
             </div>
-            <button class="btn-login" onclick="openLogin()"><i class="fas fa-user"></i> Đăng nhập</button>
-            <button class="btn-cart" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Giỏ hàng <span
-                    id="cart-count">0</span></button>
-        </div>
-    </nav>
+    
+            <div class="nav-center">
+                <ul>
+                    <li><a href="../index.html" onclick="showPage('home')">Trang Chủ</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="menu.html" onclick="showPage('menu')">Thực Đơn</a></li>
+                    <li><a href="Jobs.html" onclick="showPage('products')">Tuyển Dụng</a></li>
+                    <li><a href="Contact.html" onclick="showPage('contact')">Liên Hệ</a></li>
+                    <li><a href="blog.html" onclick="showPage('blog')">Blog</a></li>
+                    <li><a href="FAQ.html">FAQ</a></li>
+                </ul>
+            </div>
+    
+            <div class="nav-right">
+                <div class="search-container">
+                    <input type="text" placeholder="Tìm kiếm..." id="search-input">
+                    <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+                </div>
+                <button class="btn-login" onclick="openLogin()"><i class="fas fa-user"></i> Đăng nhập</button>
+                <button class="btn-cart" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Giỏ hàng <span
+                        id="cart-count">0</span></button>
+            </div>
+        </nav>
 
     <!-- Shopping Cart Sidebar -->
  <!-- Shopping Cart Sidebar -->
@@ -166,5 +167,6 @@
     <script src="../index.js"></script>
     <script src="menu.js"></script>
 </body>
+
 
 </html>
