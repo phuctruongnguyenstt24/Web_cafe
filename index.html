@@ -7,290 +7,297 @@
     <title>Cafe Sáng - Thức tỉnh mọi giác quan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="pages/menu.css">
     <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="nav-left">
-            <img src="Gemini_Generated_Image_8xwqe28xwqe28xwq.png" alt="Logo Chill Cafe" class="logo">
-            <h1>Chill Cafe</h1>
-        </div>
-
-        <div class="nav-center">
-            <ul>
-                <li><a href="index.html" onclick="showPage('home')">Trang Chủ</a></li>
-                <li><a href="pages/about.html">Giới Thiệu</a></li>
-                <li><a href="pages/menu.html" onclick="showPage('menu')">Thực Đơn</a></li>
-                <li><a href="pages/Jobs.html" onclick="showPage('products')">Tuyển Dụng</a></li>
-                <li><a href="pages/Contact.html" onclick="showPage('contact')">Liên Hệ</a></li>
-                <li><a href="pages/blog.html" onclick="showPage('blog')">Blog</a></li>
-                <li><a href="pages/FAQ.html">FAQ</a></li>
-            </ul>
-        </div>
-
-        <div class="nav-right">
-            <div class="search-container">
-                <input type="text" placeholder="Tìm kiếm..." id="search-input">
-                <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <!-- Logo và Brand -->
+            <div class="d-flex align-items-center">
+                <img src="Gemini_Generated_Image_8xwqe28xwqe28xwq.png" alt="Logo Chill Cafe" 
+                     class="logo me-2" style="height: 50px; border-radius: 5px;">
+                <a class="navbar-brand fw-bold fs-3" href="index.html">Chill Cafe</a>
             </div>
-            <button class="btn-login" onclick="openLogin()"><i class="fas fa-user"></i> Đăng nhập</button>
-            <button class="btn-cart" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Giỏ hàng <span
-                    id="cart-count">0</span></button>
+            
+            <!-- Nút toggle mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Nội dung navbar -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Menu chính -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home me-1"></i>Trang Chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/about.html">
+                            <i class="fas fa-info-circle me-1"></i>Giới Thiệu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/menu.html">
+                            <i class="fas fa-utensils me-1"></i>Thực Đơn
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/Jobs.html">
+                            <i class="fas fa-briefcase me-1"></i>Tuyển dụng
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/Contact.html">
+                            <i class="fas fa-phone me-1"></i>Liên Hệ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/blog.html">
+                            <i class="fas fa-blog me-1"></i>Blog
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Phần bên phải: Search, Login, Cart -->
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Search -->
+                    <div class="input-group" style="width: 250px;">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm..." id="search-input">
+                        <button class="btn btn-outline-light" type="button" id="search-button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Login -->
+                    <button class="btn btn-outline-light" id="login-button">
+                        <i class="fas fa-user me-1"></i>Đăng nhập
+                    </button>
+                    
+                     <!-- Cart -->
+                    <button class="btn btn-outline-light position-relative" onclick="toggleCart()" id="cart-button">
+                        <i class="fas fa-shopping-cart me-1"></i>Giỏ hàng
+                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            0
+                        </span>
+                    </button>
+                </div>
+            </div>
         </div>
     </nav>
 
+
+    
+
     <!-- Shopping Cart Sidebar -->
-<div id="cart-sidebar" class="cart-sidebar">
-    <div class="cart-header">
-        <h3>Giỏ hàng của bạn</h3>
-        <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="cart-items" id="cart-items">
-        <!-- Cart items will be added here dynamically -->
-        <p class="empty-cart">Giỏ hàng của bạn đang trống</p>
-    </div>
-    <div class="cart-summary">
-        <div class="summary-item">
-            <span>Tạm tính:</span>
-            <span id="cart-subtotal">0</span> VND
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="p-3 border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Giỏ hàng của bạn</h3>
+                <button class="btn btn-sm btn-outline-secondary" id="close-cart">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
         </div>
-        <div class="summary-item">
-            <span>Phí vận chuyển:</span>
-            <span id="cart-shipping">0</span> VND
+        <div class="p-3" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <p class="text-muted text-center">Giỏ hàng của bạn đang trống</p>
         </div>
-        <div class="summary-item">
-            <span>Giảm giá:</span>
-            <span id="cart-discount">0</span> VND
+        <div class="p-3 border-top">
+            <div class="d-flex justify-content-between mb-2">
+                <span>Tạm tính:</span>
+                <span id="cart-subtotal">0</span> VND
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span>Phí vận chuyển:</span>
+                <span id="cart-shipping">0</span> VND
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span>Giảm giá:</span>
+                <span id="cart-discount">0</span> VND
+            </div>
+        </div>
+        <div class="p-3 border-top bg-light">
+            <div class="d-flex justify-content-between mb-3">
+                <strong>Tổng cộng:</strong>
+                <strong><span id="cart-total">0</span> VND</strong>
+            </div>
+            <button class="btn btn-primary w-100" id="checkout-button">Thanh toán</button>
         </div>
     </div>
-    <div class="cart-footer">
-        <div class="cart-total">
-            <strong>Tổng cộng: <span id="cart-total">0</span> VND</strong>
-        </div>
-        <button class="btn-checkout" onclick="checkout()">Thanh toán</button>
-    </div>
-</div>
 
     <!-- Login Modal -->
     <div id="login-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Đăng nhập</h2>
-                <span class="close" onclick="closeLogin()">&times;</span>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng nhập</h5>
+                    <button type="button" class="btn-close" id="close-login"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Tên đăng nhập:</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu:</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                    </form>
+                    <p class="mt-3 text-center">Chưa có tài khoản? <a href="#">Đăng ký ngay</a></p>
+                </div>
             </div>
-            <div class="modal-body">
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="username">Tên đăng nhập:</label>
-                        <input type="text" id="username" required>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tư vấn trực tuyến</h5>
+                    <button type="button" class="btn-close" id="close-contact"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-4">
+                        <p><i class="fas fa-phone me-2"></i> Hotline: 028 1234 5678</p>
+                        <p><i class="fas fa-envelope me-2"></i> Email: info@cafesang.com</p>
+                        <p><i class="fas fa-clock me-2"></i> Thời gian: 7:00 - 22:00 hàng ngày</p>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Mật khẩu:</label>
-                        <input type="password" id="password" required>
-                    </div>
-                    <button type="submit" class="btn-login-submit">Đăng nhập</button>
-                </form>
-                <p class="register-link">Chưa có tài khoản? <a href="#">Đăng ký ngay</a></p>
+                    <form id="contact-form">
+                        <div class="mb-3">
+                            <label for="contact-name" class="form-label">Họ tên:</label>
+                            <input type="text" class="form-control" id="contact-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact-phone" class="form-label">Số điện thoại:</label>
+                            <input type="tel" class="form-control" id="contact-phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact-message" class="form-label">Nội dung tư vấn:</label>
+                            <textarea class="form-control" id="contact-message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Gửi yêu cầu</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Floating Contact Button -->
     <div class="floating-contact">
-        <button class="contact-btn" onclick="openContact()">
+        <button class="contact-btn" id="contact-button">
             <i class="fas fa-comments"></i>
             <span class="tooltip">Tư vấn trực tuyến</span>
         </button>
     </div>
 
-    <!-- Contact Modal -->
-    <div id="contact-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Tư vấn trực tuyến</h2>
-                <span class="close" onclick="closeContact()">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="contact-info">
-                    <p><i class="fas fa-phone"></i> Hotline: 028 1234 5678</p>
-                    <p><i class="fas fa-envelope"></i> Email: info@cafesang.com</p>
-                    <p><i class="fas fa-clock"></i> Thời gian: 7:00 - 22:00 hàng ngày</p>
-                </div>
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="contact-name">Họ tên:</label>
-                        <input type="text" id="contact-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-phone">Số điện thoại:</label>
-                        <input type="tel" id="contact-phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-message">Nội dung tư vấn:</label>
-                        <textarea id="contact-message" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-contact-submit">Gửi yêu cầu</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
-
-    <!-- Phan Rieng -->
-    <!-- Main Content Area -->
+     <!-- phần code riêng -->
+    <!-- Main Content -->
     <main>
-        <!-- Trang Chủ -->
-        <section id="home-page" class="page active">
-            <!-- Cập nhật phần Hero Section -->
-            <div class="hero-section">
-                <div class="hero-content">
-                    <h2>Chào mừng đến với Chill Cafe</h2>
-                    <p>Nơi hương vị cà phê nguyên chất đánh thức mọi giác quan của bạn</p>
-                    <button class="btn-hero" onclick="gotoMenu('menu')">Khám phá thực đơn</button>
-                </div>
-                <div class="hero-image">
-                    <div class="slideshow-container">
-                        <div class="slide active">
-                            <img src="https://hunufa.vn/wp-content/uploads/2024/11/top-nhung-hinh-anh-ly-ca-phe-sua-da-dep-nhat-67.webp"
-                                alt="Cà phê thơm ngon">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold mb-3">Chào mừng đến với Chill Cafe</h1>
+                        <p class="lead mb-4">Nơi hương vị cà phê nguyên chất đánh thức mọi giác quan của bạn</p>
+                        <a href="pages/menu.html" class="btn btn-primary btn-lg">Khám phá thực đơn</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Carousel Bootstrap -->
+                        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                            </div>
+                            <div class="carousel-inner rounded">
+                                <div class="carousel-item active">
+                                    <img src="https://hunufa.vn/wp-content/uploads/2024/11/top-nhung-hinh-anh-ly-ca-phe-sua-da-dep-nhat-67.webp" class="d-block w-100" alt="Cà phê thơm ngon">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://thegioimaypha.com/wp-content/uploads/2021/07/thanh-phan-chinh-trong-espresso-coffee-la-gi-800x457.jpg" class="d-block w-100" alt="Cà phê espresso">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://noithatkendesign.vn/storage/app/media/y-tuong-thiet-ke-quan-cafe-khong-gian-mo/y-tuong-thiet-ke-quan-cafe-khong-gian-mo-dep-nuc-long-2.jpg" class="d-block w-100" alt="Không gian cafe">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://vietgiao.edu.vn/wp-content/uploads/2021/07/barista-4.jpg" class="d-block w-100" alt="Barista pha chế">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
-                        <div class="slide">
-                            <img src="https://thegioimaypha.com/wp-content/uploads/2021/07/thanh-phan-chinh-trong-espresso-coffee-la-gi-800x457.jpg"
-                                alt="Cà phê espresso">
-                        </div>
-                        <div class="slide">
-                            <img src="https://noithatkendesign.vn/storage/app/media/y-tuong-thiet-ke-quan-cafe-khong-gian-mo/y-tuong-thiet-ke-quan-cafe-khong-gian-mo-dep-nuc-long-2.jpg"
-                                alt="Không gian cafe">
-                        </div>
-                        <div class="slide">
-                            <img src="https://vietgiao.edu.vn/wp-content/uploads/2021/07/barista-4.jpg"
-                                alt="Barista pha chế">
-                        </div>
-
-                        <!-- Navigation dots -->
-                        <div class="slideshow-dots">
-                            <span class="dot active" onclick="currentSlide(1)"></span>
-                            <span class="dot" onclick="currentSlide(2)"></span>
-                            <span class="dot" onclick="currentSlide(3)"></span>
-                            <span class="dot" onclick="currentSlide(4)"></span>
-                        </div>
-
-                        <!-- Navigation arrows -->
-                        <button class="slideshow-prev" onclick="plusSlides(-1)">&#10094;</button>
-                        <button class="slideshow-next" onclick="plusSlides(1)">&#10095;</button>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="coffee-special">
-                <h3>Cà phê đặc biệt của chúng tôi</h3>
-                <div class="coffee-grid">
-                    <div class="coffee-item">
-                        <img src="https://vinbarista.com/uploads/editer/images/blogs/ca-phe-arabica-la-gi.jpg"
-                            alt="Arabica">
-                        <h4>Arabica</h4>
-                        <p>Hương vị tinh tế, thơm ngon</p>
+        <!-- Coffee Special Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Cà phê đặc biệt của chúng tôi</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="https://vinbarista.com/uploads/editer/images/blogs/ca-phe-arabica-la-gi.jpg" class="card-img-top" alt="Arabica">
+                            <div class="card-body">
+                                <h5 class="card-title">Arabica</h5>
+                                <p class="card-text">Hương vị tinh tế, thơm ngon</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="coffee-item">
-                        <img src="https://vinbarista.com/uploads/news/ca-phe-robusta-la-gi-ca-phe-robusta-co-vi-gi-va-cach-nhan-biet-202407151636.jpg"
-                            alt="Robusta">
-                        <h4>Robusta</h4>
-                        <p>Đậm đà và mạnh mẽ</p>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="https://vinbarista.com/uploads/news/ca-phe-robusta-la-gi-ca-phe-robusta-co-vi-gi-va-cach-nhan-biet-202407151636.jpg" class="card-img-top" alt="Robusta">
+                            <div class="card-body">
+                                <h5 class="card-title">Robusta</h5>
+                                <p class="card-text">Đậm đà và mạnh mẽ</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="coffee-item">
-                        <img src="https://caphecc.com/wp-content/uploads/2023/05/CA-PHE-ESPRESO-2.png" alt="Espresso">
-                        <h4>Espresso</h4>
-                        <p>Cô đặc và thơm ngon</p>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="https://caphecc.com/wp-content/uploads/2023/05/CA-PHE-ESPRESO-2.png" class="card-img-top" alt="Espresso">
+                            <div class="card-body">
+                                <h5 class="card-title">Espresso</h5>
+                                <p class="card-text">Cô đặc và thơm ngon</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="gallery-section">
-                <h3>Không gian Chill Cafe</h3>
-
-                <!-- Fade Slider -->
-                <div class="fade-slider">
-                    <div class="fade-slide active">
-                        <img src="https://file.hstatic.net/1000075078/file/cao_thang_2_-_img_3648_241f95e136a0437d9f7998efd6c8370e_1024x1024.jpg"
-                            alt="Không gian cafe">
-                    </div>
-                    <div class="fade-slide">
-                        <img src="https://noithattruongsa.com/wp-content/uploads/2023/10/mau-thie-ke-quan-cafe-khong-gian-mo-dep-2-20-Hang-Noi-That-Truong-Sa.jpg"
-                            alt="Không gian cafe">
-                    </div>
-                    <div class="fade-slide">
-                        <img src="https://conndesign.vn/wp-content/uploads/2024/07/thiet-ke-quan-cafe-khong-gian-mo-17.png"
-                            alt="Không gian cafe">
-                    </div>
-                    <div class="fade-slide">
-                        <img src="https://phongcachmoc.vn/upload/images/M%E1%BA%ABu%20Qu%C3%A1n%20Cafe%20%C4%90%E1%BA%B9p%20V%E1%BB%9Bi%20Kh%C3%B4ng%20Gian%20M%E1%BB%9F%20(10).jpg"
-                            alt="Không gian cafe">
-                    </div>
-
-                    <div class="fade-slider-dots">
-                        <span class="fade-dot active" onclick="currentFadeSlide(1)"></span>
-                        <span class="fade-dot" onclick="currentFadeSlide(2)"></span>
-                        <span class="fade-dot" onclick="currentFadeSlide(3)"></span>
-                        <span class="fade-dot" onclick="currentFadeSlide(4)"></span>
-                    </div>
-                </div>
-
-                <!-- Auto Scroll Slider -->
-                <div class="auto-slider">
-                    <div class="auto-slider-track">
-                        <div class="auto-slide">
-                            <img src="https://5.imimg.com/data5/CT/WQ/FG/SELLER-80866721/cafe-interior-500x500.jpg"
-                                alt="Cafe interior">
-                        </div>
-                        <div class="auto-slide">
-                            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"
-                                alt="Coffee making">
-                        </div>
-                        <div class="auto-slide">
-                            <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=800&q=80"
-                                alt="Coffee beans">
-                        </div>
-                        <div class="auto-slide">
-                            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=800&q=80"
-                                alt="Customers enjoying">
-                        </div>
-
-                        <!-- Duplicate for seamless loop -->
-                        <div class="auto-slide">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzV9l4H0P03yDY9sf7dNlsU8Zu3au3UvbKcQ&s"
-                                alt="Cafe interior">
-                        </div>
-                        <div class="auto-slide">
-                            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=800&q=80"
-                                alt="Coffee making">
-                        </div>
-                        <div class="auto-slide">
-                            <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?auto=format&fit=crop&w=800&q=80"
-                                alt="Coffee beans">
-                        </div>
-                        <div class="auto-slide">
-                            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=800&q=80"
-                                alt="Customers enjoying">
-                        </div>
-                    </div>
-                </div>
-
-
+        <!-- Gallery Section -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Không gian Chill Cafe</h2>
+                
                 <!-- Gallery Slider with Navigation -->
-                <div class="gallery-slider">
-                    <div class="gallery-track">
+                <div class="gallery-slider mb-5">
+                    <div class="gallery-track" id="gallery-track">
                         <div class="gallery-slide">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Latte_with_winged_tulip_art.jpg"
-                                alt="Coffee art">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Latte_with_winged_tulip_art.jpg" alt="Coffee art">
                         </div>
                         <div class="gallery-slide">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV57pLVU9i0dBLapJ-WxDBLpEo0MBWb_pyVg&s"
-                                alt="Coffee art">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV57pLVU9i0dBLapJ-WxDBLpEo0MBWb_pyVg&s" alt="Coffee art">
                         </div>
                         <div class="gallery-slide">
                             <img src="https://media.s-bol.com/JkMXzNJY94oo/BB9XlRX/150x210.jpg" alt="Coffee art">
@@ -299,299 +306,116 @@
                             <img src="https://media1.agfg.com.au/images/content/5790/20553.jpg" alt="Coffee art">
                         </div>
                         <div class="gallery-slide">
-                            <img src="https://i.pinimg.com/564x/86/19/68/861968a61e8ff58829c3855ac6f17a88.jpg"
-                                alt="Coffee art">
+                            <img src="https://i.pinimg.com/564x/86/19/68/861968a61e8ff58829c3855ac6f17a88.jpg" alt="Coffee art">
                         </div>
                         <div class="gallery-slide">
-                            <img src="https://i.pinimg.com/736x/da/64/7c/da647c6615074d861ff4b64178871955.jpg"
-                                alt="Coffee art">
+                            <img src="https://i.pinimg.com/736x/da/64/7c/da647c6615074d861ff4b64178871955.jpg" alt="Coffee art">
                         </div>
                     </div>
-                    <button class="gallery-nav gallery-prev" onclick="galleryPrev()">&#10094;</button>
-                    <button class="gallery-nav gallery-next" onclick="galleryNext()">&#10095;</button>
+                    <button class="gallery-nav gallery-prev" id="gallery-prev">&#10094;</button>
+                    <button class="gallery-nav gallery-next" id="gallery-next">&#10095;</button>
                 </div>
-            </div>
-        </section>
-
- 
-
-        <!-- Thực Đơn -->
-        <section id="menu-page" class="page">
-            <h2>Thực Đơn Cafe</h2>
-            <div class="menu-categories">
-                <div class="menu-category">
-                    <h3><i class="fas fa-coffee"></i> Cà phê</h3>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <img src="images/espresso.jpg" alt="Espresso">
-                            <div class="item-info">
-                                <h4>Espresso</h4>
-                                <p>Cà phê đậm đà, thơm ngon</p>
-                                <div class="item-price">35.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Espresso', 35000)">Thêm vào
-                                    giỏ</button>
-                            </div>
+                
+                <!-- Bootstrap Carousel for Gallery -->
+                <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    </div>
+                    <div class="carousel-inner rounded">
+                        <div class="carousel-item active">
+                            <img src="https://file.hstatic.net/1000075078/file/cao_thang_2_-_img_3648_241f95e136a0437d9f7998efd6c8370e_1024x1024.jpg" class="d-block w-100" alt="Không gian cafe">
                         </div>
-                        <div class="menu-item">
-                            <img src="images/americano.jpg" alt="Americano">
-                            <div class="item-info">
-                                <h4>Americano</h4>
-                                <p>Espresso pha loãng với nước nóng</p>
-                                <div class="item-price">40.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Americano', 40000)">Thêm vào
-                                    giỏ</button>
-                            </div>
+                        <div class="carousel-item">
+                            <img src="https://noithattruongsa.com/wp-content/uploads/2023/10/mau-thie-ke-quan-cafe-khong-gian-mo-dep-2-20-Hang-Noi-That-Truong-Sa.jpg" class="d-block w-100" alt="Không gian cafe">
                         </div>
-                        <div class="menu-item">
-                            <img src="images/latte.jpg" alt="Latte">
-                            <div class="item-info">
-                                <h4>Latte</h4>
-                                <p>Espresso với sữa nóng và lớp bọt sữa</p>
-                                <div class="item-price">50.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Latte', 50000)">Thêm vào giỏ</button>
-                            </div>
+                        <div class="carousel-item">
+                            <img src="https://conndesign.vn/wp-content/uploads/2024/07/thiet-ke-quan-cafe-khong-gian-mo-17.png" class="d-block w-100" alt="Không gian cafe">
                         </div>
-                        <div class="menu-item">
-                            <img src="images/cappuccino.jpg" alt="Cappuccino">
-                            <div class="item-info">
-                                <h4>Cappuccino</h4>
-                                <p>Espresso với sữa nóng và nhiều bọt sữa</p>
-                                <div class="item-price">45.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Cappuccino', 45000)">Thêm vào
-                                    giỏ</button>
-                            </div>
+                        <div class="carousel-item">
+                            <img src="https://phongcachmoc.vn/upload/images/M%E1%BA%ABu%20Qu%C3%A1n%20Cafe%20%C4%90%E1%BA%B9p%20V%E1%BB%9Bi%20Kh%C3%B4ng%20Gian%20M%E1%BB%9F%20(10).jpg" class="d-block w-100" alt="Không gian cafe">
                         </div>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-
-                <div class="menu-category">
-                    <h3><i class="fas fa-mug-hot"></i> Trà</h3>
-                    <div class="menu-items">
-                        <div class="menu-item">
-                            <img src="images/peach-tea.jpg" alt="Trà đào">
-                            <div class="item-info">
-                                <h4>Trà đào</h4>
-                                <p>Trà đào thơm ngon, thanh mát</p>
-                                <div class="item-price">35.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Trà đào', 35000)">Thêm vào giỏ</button>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <img src="images/milk-tea.jpg" alt="Trà sữa">
-                            <div class="item-info">
-                                <h4>Trà sữa</h4>
-                                <p>Trà sữa thơm ngon, hấp dẫn</p>
-                                <div class="item-price">40.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Trà sữa', 40000)">Thêm vào giỏ</button>
-                            </div>
-                        </div>
-                        <div class="menu-item">
-                            <img src="images/green-tea.jpg" alt="Trà xanh">
-                            <div class="item-info">
-                                <h4>Trà xanh</h4>
-                                <p>Trà xanh thanh mát, tốt cho sức khỏe</p>
-                                <div class="item-price">30.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Trà xanh', 30000)">Thêm vào
-                                    giỏ</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sản Phẩm -->
-        <section id="products-page" class="page">
-            <h2>Sản Phẩm Cafe</h2>
-            <div class="products-categories">
-                <div class="product-category">
-                    <h3><i class="fas fa-coffee-beans"></i> Cà phê hạt</h3>
-                    <div class="product-items">
-                        <div class="product-item">
-                            <img src="images/arabica-beans.jpg" alt="Arabica Đà Lạt">
-                            <div class="item-info">
-                                <h4>Arabica Đà Lạt</h4>
-                                <p>Hạt cà phê Arabica chất lượng cao từ Đà Lạt</p>
-                                <div class="item-price">250.000 VND/kg</div>
-                                <button class="btn-add-cart" onclick="addToCart('Arabica Đà Lạt', 250000)">Thêm vào
-                                    giỏ</button>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <img src="images/robusta-beans.jpg" alt="Robusta Buôn Ma Thuột">
-                            <div class="item-info">
-                                <h4>Robusta Buôn Ma Thuột</h4>
-                                <p>Hạt cà phê Robusta đậm đà từ Buôn Ma Thuột</p>
-                                <div class="item-price">200.000 VND/kg</div>
-                                <button class="btn-add-cart" onclick="addToCart('Robusta Buôn Ma Thuột', 200000)">Thêm
-                                    vào giỏ</button>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <img src="images/blend-beans.jpg" alt="Blend Đặc Biệt">
-                            <div class="item-info">
-                                <h4>Blend Đặc Biệt</h4>
-                                <p>Pha trộn đặc biệt từ các loại hạt cà phê ngon nhất</p>
-                                <div class="item-price">300.000 VND/kg</div>
-                                <button class="btn-add-cart" onclick="addToCart('Blend Đặc Biệt', 300000)">Thêm vào
-                                    giỏ</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-category">
-                    <h3><i class="fas fa-tools"></i> Dụng cụ pha chế</h3>
-                    <div class="product-items">
-                        <div class="product-item">
-                            <img src="images/coffee-filter.jpg" alt="Phin cà phê inox">
-                            <div class="item-info">
-                                <h4>Phin cà phê inox</h4>
-                                <p>Phin cà phê inox cao cấp, bền đẹp</p>
-                                <div class="item-price">150.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Phin cà phê inox', 150000)">Thêm vào
-                                    giỏ</button>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <img src="images/coffee-grinder.jpg" alt="Máy xay cà phê">
-                            <div class="item-info">
-                                <h4>Máy xay cà phê</h4>
-                                <p>Máy xay cà phê chuyên nghiệp</p>
-                                <div class="item-price">1.500.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Máy xay cà phê', 1500000)">Thêm vào
-                                    giỏ</button>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <img src="images/coffee-cup-set.jpg" alt="Bộ ly tách">
-                            <div class="item-info">
-                                <h4>Bộ ly tách</h4>
-                                <p>Bộ ly tách cà phê cao cấp</p>
-                                <div class="item-price">200.000 VND</div>
-                                <button class="btn-add-cart" onclick="addToCart('Bộ ly tách', 200000)">Thêm vào
-                                    giỏ</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Liên Hệ -->
-        <section id="contact-page" class="page">
-            <h2>Liên Hệ Với Chúng Tôi</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Thông tin liên hệ</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Địa chỉ: 123 Đường Cà Phê, Quận 1, TP.HCM</p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <p>Điện thoại: 028 1234 5678</p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <p>Email: info@cafesang.com</p>
-                    </div>
-
-                    <h3>Giờ mở cửa</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-clock"></i>
-                        <p>Thứ 2 - Thứ 6: 7:00 - 22:00</p>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-clock"></i>
-                        <p>Thứ 7 - Chủ nhật: 7:00 - 23:00</p>
-                    </div>
-                </div>
-                <div class="contact-map">
-                    <img src="images/map.jpg" alt="Bản đồ">
-                    <p>Bản đồ chỉ đường đến Chill Cafe</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Blog -->
-        <section id="blog-page" class="page">
-            <h2>Blog & Tin Tức Về Cafe</h2>
-            <div class="blog-posts">
-                <article class="blog-post">
-                    <img src="images/blog1.jpg" alt="Cách pha cà phê ngon tại nhà">
-                    <div class="blog-content">
-                        <h3>Cách pha cà phê ngon tại nhà</h3>
-                        <p>Hướng dẫn chi tiết cách pha cà phê phin truyền thống thơm ngon đúng điệu. Từ việc chọn hạt cà
-                            phê, xay hạt, đến kỹ thuật pha chế chuẩn...</p>
-                        <a href="#" class="read-more">Đọc tiếp</a>
-                    </div>
-                </article>
-
-                <article class="blog-post">
-                    <img src="images/blog2.jpg" alt="Lợi ích của cà phê">
-                    <div class="blog-content">
-                        <h3>Lợi ích của cà phê đối với sức khỏe</h3>
-                        <p>Cà phê không chỉ giúp tỉnh táo mà còn có nhiều lợi ích sức khỏe như chống oxy hóa, giảm nguy
-                            cơ mắc bệnh tiểu đường, bảo vệ gan...</p>
-                        <a href="#" class="read-more">Đọc tiếp</a>
-                    </div>
-                </article>
-
-                <article class="blog-post">
-                    <img src="images/blog3.jpg" alt="Các loại cà phê phổ biến">
-                    <div class="blog-content">
-                        <h3>Các loại cà phê phổ biến tại Việt Nam</h3>
-                        <p>Khám phá sự đa dạng của các loại cà phê được ưa chuộng tại Việt Nam từ Arabica, Robusta đến
-                            các loại cà phê đặc sản vùng miền...</p>
-                        <a href="#" class="read-more">Đọc tiếp</a>
-                    </div>
-                </article>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Chill Cafe</h3>
-                <p>Nơi hương vị cà phê nguyên chất đánh thức mọi giác quan của bạn</p>
-            </div>
-            <div class="footer-section">
-                <h3>Liên kết nhanh</h3>
-                <ul>
-                    <li><a href="#home" onclick="showPage('home')">Trang chủ</a></li>
-                    <li><a href="#menu" onclick="showPage('menu')">Thực đơn</a></li>
-                    <li><a href="#products" onclick="showPage('products')">Sản phẩm</a></li>
-                    <li><a href="#contact" onclick="showPage('contact')">Liên hệ</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Theo dõi chúng tôi</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5>Giới thiệu</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="pages/about.html" class="text-light text-decoration-none">Về Chill Cafe</a></li>
+                        <li><a href="pages/menu.html" class="text-light text-decoration-none">Sản phẩm</a></li>
+                        <li><a href="pages/blog.html" class="text-light text-decoration-none">Chuyện cà phê</a></li>
+                        <li><a href="pages/Jobs.html" class="text-light text-decoration-none">Tuyển dụng</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5>Điều khoản</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light text-decoration-none">Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Chính sách bảo mật</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Hướng dẫn xuất hóa đơn</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5>Liên hệ</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fa-solid fa-phone me-2"></i> Đặt hàng: 0123 456 789</li>
+                        <li><i class="fa-solid fa-location-dot me-2"></i>
+                            Tầng 2, Tòa nhà Coffee Tower,<br>
+                            123 Nguyễn Huệ, Quận 1, TP.HCM
+                        </li>
+                        <li><i class="fa-solid fa-envelope me-2"></i> hello@chillcafe.vn</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5>Theo dõi chúng tôi</h5>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="text-light fs-4"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-light fs-4"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-light fs-4"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="text-light fs-4"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Chill Cafe. All rights reserved.</p>
+
+            <hr class="my-4">
+
+            <div class="text-center">
+                <p class="mb-0">
+                    Công ty Cà Phê Chill Việt Nam – Mã số DN: 0312867172 do Sở KHĐT TP.HCM cấp ngày 16/10/2025.<br>
+                    Địa chỉ: 123 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh.
+                    Điện thoại: 0123 456 789 – Email: hello@chillcafe.vn<br>
+                    &copy; 2025 Chill Cafe | Thiết kế bởi <strong>Nguyễn Trường Phúc, MSSV:2311047</strong> & <strong>Đỗ
+                        Khải Nhân, MSSV:KTPM2311014</strong> ❤️. Mọi quyền được bảo lưu.
+                </p>
+            </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-     <script src="pages/menu.js"></script>
-    <script src="index.js"></script>
-
-    <script>
+    <script src="index.js">
 
     </script>
-
 </body>
-
-
 </html>
