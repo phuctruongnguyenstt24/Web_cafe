@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về Chúng Tôi - Chill Cafe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="about.css">
+  
+</head>
+<body>
+<!-- Phần code chung -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <!-- Logo và Brand -->
+        <div class="d-flex align-items-center">
+            <img src="../Gemini_Generated_Image_8xwqe28xwqe28xwq.png" alt="Logo Chill Cafe" 
+                 class="logo me-2" style="height: 50px; border-radius: 5px;">
+            <a class="navbar-brand fw-bold fs-3" href="../index.html">Chill Cafe</a>
+        </div>
+        
+        <!-- Nút toggle mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Nội dung navbar -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <!-- Menu chính -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">
+                        <i class="fas fa-home me-1"></i>Trang Chủ
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="about.html">
+                        <i class="fas fa-info-circle me-1"></i>Giới Thiệu
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="menu.html">
+                        <i class="fas fa-utensils me-1"></i>Thực Đơn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Jobs.html">
+                        <i class="fas fa-briefcase me-1"></i>Tuyển dụng
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Contact.html">
+                        <i class="fas fa-phone me-1"></i>Liên Hệ
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="blog.html">
+                        <i class="fas fa-blog me-1"></i>Blog
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Phần bên phải: Search, Login, Cart -->
+            <div class="d-flex align-items-center gap-3">
+                <!-- Search -->
+                <div class="input-group" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm..." id="search-input">
+                    <button class="btn btn-outline-light" type="button" id="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                
+                <!-- Login -->
+                <button class="btn btn-outline-light" id="login-button">
+                    <i class="fas fa-user me-1"></i>Đăng nhập
+                </button>
+                
+                <!-- Cart -->
+                <button class="btn btn-outline-light position-relative" onclick="toggleCart()" id="cart-button">
+                    <i class="fas fa-shopping-cart me-1"></i>Giỏ hàng
+                    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+ 
+
+
+  
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="p-3 border-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">Giỏ hàng của bạn</h3>
+                <button class="btn btn-sm btn-outline-secondary" id="close-cart">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="p-3" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+            <p class="text-muted text-center">Giỏ hàng của bạn đang trống</p>
+        </div>
+        <div class="p-3 border-top">
+            <div class="d-flex justify-content-between mb-2">
+                <span>Tạm tính:</span>
+                <span id="cart-subtotal">0</span> VND
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span>Phí vận chuyển:</span>
+                <span id="cart-shipping">0</span> VND
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span>Giảm giá:</span>
+                <span id="cart-discount">0</span> VND
+            </div>
+        </div>
+        <div class="p-3 border-top bg-light">
+            <div class="d-flex justify-content-between mb-3">
+                <strong>Tổng cộng:</strong>
+                <strong><span id="cart-total">0</span> VND</strong>
+            </div>
+            <button class="btn btn-primary w-100" id="checkout-button">Thanh toán</button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng nhập</h5>
+                    <button type="button" class="btn-close" id="close-login"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Tên đăng nhập:</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu:</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                    </form>
+                    <p class="mt-3 text-center">Chưa có tài khoản? <a href="#">Đăng ký ngay</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tư vấn trực tuyến</h5>
+                    <button type="button" class="btn-close" id="close-contact"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-4">
+                        <p><i class="fas fa-phone me-2"></i> Hotline: 028 1234 5678</p>
+                        <p><i class="fas fa-envelope me-2"></i> Email: info@cafesang.com</p>
+                        <p><i class="fas fa-clock me-2"></i> Thời gian: 7:00 - 22:00 hàng ngày</p>
+                    </div>
+                    <form id="contact-form">
+                        <div class="mb-3">
+                            <label for="contact-name" class="form-label">Họ tên:</label>
+                            <input type="text" class="form-control" id="contact-name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact-phone" class="form-label">Số điện thoại:</label>
+                            <input type="tel" class="form-control" id="contact-phone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact-message" class="form-label">Nội dung tư vấn:</label>
+                            <textarea class="form-control" id="contact-message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Gửi yêu cầu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Contact Button -->
+    <div class="floating-contact">
+        <button class="contact-btn" id="contact-button">
+            <i class="fas fa-comments"></i>
+            <span class="tooltip">Tư vấn trực tuyến</span>
+        </button>
+    </div>
+
+
+   <!-- Phần code riêng -->
+    <!-- Giới Thiệu -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="text-center mb-5">
+                        <h1 class="display-4 fw-bold text-dark">Về Chill Cafe</h1>
+                        <p class="lead">Hơn 10 năm mang đến những trải nghiệm cà phê tuyệt vời</p>
+                    </div>
+                    
+                    <div class="row align-items-center mb-5">
+                        <div class="col-lg-6 mb-4 mb-lg-0">
+                            <div class="about-text">
+                                <p class="fs-5">Chúng tôi là quán cafe với hơn 10 năm kinh nghiệm trong việc pha chế và phục vụ những ly cà phê chất lượng cao.</p>
+                                
+                                <div class="vision-mission mt-4">
+                                    <h3 class="h4 text-primary">Tầm nhìn của chúng tôi</h3>
+                                    <p class="mb-4">Mang đến trải nghiệm cà phê tuyệt vời nhất cho khách hàng</p>
+
+                                    <h3 class="h4 text-primary">Sứ mệnh</h3>
+                                    <p>Lan tỏa văn hóa thưởng thức cà phê chất lượng đến mọi người</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="about-image">
+                                <img src="https://5.imimg.com/data5/CT/WQ/FG/SELLER-80866721/cafe-interior-500x500.jpg" alt="Về chúng tôi" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-section mt-5">
+                        <div class="text-center mb-5">
+                            <h2 class="fw-bold text-dark">Đội ngũ của chúng tôi</h2>
+                            <p class="lead">Barista chuyên nghiệp với chứng chỉ quốc tế</p>
+                        </div>
+                        
+                        <div class="row justify-content-center">
+                            <div class="col-md-5 mb-4">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <img src="https://5.imimg.com/data5/CT/WQ/FG/SELLER-80866721/cafe-interior-500x500.jpg" class="card-img-top" alt="Barista">
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">Nguyễn Trường Phúc</h4>
+                                        <p class="card-text text-muted">KTPM2311047</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 mb-4">
+                                <div class="card h-100 border-0 shadow-sm">
+                                    <img src="https://5.imimg.com/data5/CT/WQ/FG/SELLER-80866721/cafe-interior-500x500.jpg" class="card-img-top" alt="Barista">
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title">Đỗ Khải Nhân</h4>
+                                        <p class="card-text text-muted">KTPM2311014</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Chill Cafe</h5>
+                    <p>Mang đến trải nghiệm cà phê tuyệt vời nhất</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>© 2023 Chill Cafe. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Liên kết JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="../index.js"></script>
+   
+    
+</body>
+</html>

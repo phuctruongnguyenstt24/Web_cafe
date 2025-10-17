@@ -1,0 +1,42 @@
+ /* CSS tối thiểu cho trang Contact */
+    .contact-hero {
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+        color: white;
+    }
+    
+    .contact-card {
+        transition: transform 0.3s ease;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .map-container {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .btn-contact {
+        background: linear-gradient(45deg, #8B4513, #D2691E);
+        border: none;
+        padding: 12px 30px;
+    }
+    
+    .btn-contact:hover {
+        background: linear-gradient(45deg, #654321, #A0522D);
+        transform: translateY(-2px);
+    }
+    
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+    }

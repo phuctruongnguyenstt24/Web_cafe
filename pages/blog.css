@@ -1,0 +1,54 @@
+ /* CSS tối thiểu cho trang Blog */
+    .blog-hero {
+        background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+        color: white;
+    }
+    
+    .blog-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        overflow: hidden;
+    }
+    
+    .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .blog-img {
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .blog-card:hover .blog-img {
+        transform: scale(1.05);
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+        color: #8B4513;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-section {
+        background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+    }
+    
+    .read-more {
+        color: #8B4513;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+    
+    .read-more:hover {
+        color: #654321;
+    }
+    
+    .category-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        z-index: 2;
+    }

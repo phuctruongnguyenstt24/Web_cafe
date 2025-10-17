@@ -1,0 +1,29 @@
+  /* CSS tối thiểu cho trang Jobs */
+    .cafe-img {
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    
+    .carousel-img {
+        height: 500px;
+        object-fit: cover;
+    }
+    
+    .job-card {
+        transition: transform 0.3s ease;
+        margin-bottom: 1.5rem;
+    }
+    
+    .job-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .btn-color {
+        background: linear-gradient(45deg, #8B4513, #D2691E);
+        border: none;
+    }
+    
+    .btn-color:hover {
+        background: linear-gradient(45deg, #654321, #A0522D);
+    }
